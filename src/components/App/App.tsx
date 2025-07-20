@@ -1,6 +1,7 @@
 import css from "./App.module.css";
 import NoteList from "../NoteList/NoteList";
-import NoteModal from "../Modal/Modal";
+import Modal from "../Modal/Modal";
+import NoteForm from "../NoteForm/NoteForm";
 import Pagination from "../Pagination/Pagination";
 import SearchBox from "../SearchBox/SearchBox";
 import Loader from "../Loader/Loader";
@@ -47,7 +48,12 @@ export default function App() {
         </button>
       </header>
       {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
-      {isCreateNote && <NoteModal onClose={handleClose} />}
+      {isCreateNote && (
+        <Modal onClose={handleClose}>
+          <NoteForm onClose={handleClose} />
+        </Modal>
+      )}
+
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
     </div>
